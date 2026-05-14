@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>// Rachit Murarka</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
+
+        body {
+            background-color: #010409;
+            font-family: 'Fira Code', monospace;
+            color: #d7f9ff;
+        }
+
+        /* ===== Subtle Scrollbars ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 229, 255, 0.18);
+            border-radius: 10px;
+            transition: 0.2s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 170, 0.35);
+        }
+
+        /* ===== Code Base ===== */
+        pre code {
+            background: transparent !important;
+            font-size: 13px !important;
+            font-family: 'Fira Code', monospace !important;
+        }
+
+        .hljs {
+            background:
+                radial-gradient(circle at 15% 20%, rgba(0, 229, 255, 0.06), transparent 45%),
+                radial-gradient(circle at 85% 70%, rgba(0, 255, 170, 0.05), transparent 50%),
+                linear-gradient(180deg, #050a10 0%, #02060c 100%);
+
+            color: #d7f9ff;
+            padding: 1.25rem;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+
+            border: 1px solid rgba(0, 229, 255, 0.08);
+
+            box-shadow:
+                0 0 0 1px rgba(0, 255, 200, 0.05),
+                0 20px 60px rgba(0, 0, 0, 0.65),
+                0 0 40px rgba(0, 229, 255, 0.06);
+
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        /* ===== Ambient layer (very subtle motion) ===== */
+        .hljs::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(circle at 40% 40%, rgba(0,255,200,0.05), transparent 60%),
+                radial-gradient(circle at 70% 20%, rgba(0,229,255,0.04), transparent 55%);
+
+            mix-blend-mode: screen;
+            pointer-events: none;
+
+            animation: ambientShift 12s ease-in-out infinite;
+        }
+
+        /* ===== Soft scan glow ===== */
+        .hljs::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background: linear-gradient(
+                180deg,
+                transparent 0%,
+                rgba(0, 255, 200, 0.03) 50%,
+                transparent 100%
+            );
+
+            transform: translateY(-100%);
+            animation: scanMove 7s linear infinite;
+            pointer-events: none;
+        }
+
+        /* ===== Hover (subtle lift only) ===== */
+        .hljs:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 0 0 1px rgba(0, 255, 200, 0.12),
+                0 30px 80px rgba(0, 0, 0, 0.75),
+                0 0 60px rgba(0, 229, 255, 0.10);
+        }
+
+        /* ===== Selection ===== */
+        ::selection {
+            background: rgba(0, 255, 200, 0.25);
+        }
+
+        /* ===== Line numbers ===== */
+        .hljs-ln-numbers {
+            text-align: right;
+            color: rgba(120, 200, 220, 0.25);
+            border-right: 1px solid rgba(0, 255, 200, 0.08);
+            vertical-align: top;
+            padding-right: 12px !important;
+            user-select: none;
+        }
+
+        .hljs-ln-code {
+            padding-left: 12px !important;
+        }
+
+        /* ===== Syntax Colors (cyan/green focused theme) ===== */
+
+        .hljs-keyword,
+        .hljs-selector-tag,
+        .hljs-literal,
+        .hljs-built_in {
+            color: #39ffb6 !important;
+            text-shadow: 0 0 8px rgba(57, 255, 182, 0.25);
+        }
+
+        .hljs-title,
+        .hljs-function {
+            color: #00e5ff !important;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.25);
+        }
+
+        .hljs-string {
+            color: #a6ffdf !important;
+        }
+
+        .hljs-number {
+            color: #7df9ff !important;
+            text-shadow: 0 0 8px rgba(125, 249, 255, 0.2);
+        }
+
+        .hljs-comment {
+            color: rgba(150, 190, 200, 0.25) !important;
+            font-style: italic;
+        }
+
+        .hljs-variable,
+        .hljs-params {
+            color: #6ee7ff !important;
+        }
+
+        .hljs-class,
+        .hljs-title.class_ {
+            color: #3de6d1 !important;
+            text-shadow: 0 0 10px rgba(61, 230, 209, 0.2);
+        }
+
+        /* ===== Animations ===== */
+        @keyframes ambientShift {
+            0%, 100% {
+                transform: translate3d(0,0,0) scale(1);
+            }
+            50% {
+                transform: translate3d(8px,-6px,0) scale(1.02);
+            }
+        }
+
+        @keyframes scanMove {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+    </style>
+</head>
+<body class="text-[#c9d1d9] h-screen flex flex-col antialiased overflow-hidden">
+
+<header class="bg-[#0d1117] border-b border-[#30363d] p-4 z-50">
+    <div class="container mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <h1 class="text-md font-bold text-white tracking-tighter">// <span id="header-path" class="text-gray-500">DASHBOARD</span></h1>
+        </div>
+        <button id="back-btn" class="hidden bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] text-gray-300 text-xs font-bold py-2 px-4 rounded-md transition-all flex items-center gap-2" onclick="showRepos()">
+            <i class="fa-solid fa-arrow-left"></i> BACK TO REPOS
+        </button>
+    </div>
+</header>
+
+<div id="repo-viewer" class="flex-grow overflow-auto p-8 bg-[#010409]">
+    <div id="repo-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    </div>
+</div>
+
+<div id="code-studio" class="hidden flex-grow flex h-full overflow-hidden">
+    <aside class="w-64 bg-[#0d1117] border-r border-[#30363d] flex flex-col">
+        <div class="p-3 border-b border-[#30363d] flex justify-between items-center bg-[#161b22]">
+            <span class="text-[10px] font-black text-gray-500 tracking-widest uppercase">File Tree</span>
+            <i class="fa-solid fa-folder-tree text-gray-600 text-xs"></i>
+        </div>
+        <ul id="file-tree" class="flex-grow p-2 overflow-y-auto"></ul>
+    </aside>
+    
+    <main class="flex-1 flex flex-col bg-[#010409] min-w-0">
+        <div class="bg-[#0d1117] border-b border-[#30363d] px-4 py-2 flex items-center justify-between">
+            <div class="flex items-center gap-2 overflow-hidden">
+                <i id="file-icon-main" class="fa-solid fa-file text-gray-600 text-xs"></i>
+                <span id="current-file-name" class="text-[11px] font-medium text-gray-400 truncate">Select a resource...</span>
+            </div>
+            <div id="lang-tag" class="text-[9px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-bold uppercase">--</div>
+        </div>
+        
+        <div id="content-area" class="flex-1 overflow-auto p-0 relative">
+            <pre id="code-pre" class="hidden"><code id="code-output"></code></pre>            
+            <div id="image-viewer" class="hidden w-full h-full flex items-center justify-center bg-black/20 p-8">
+                <img id="img-output" class="max-w-full max-h-full rounded shadow-2xl border border-[#30363d]" src="">
+            </div>
+
+            <div id="welcome-msg" class="h-full flex flex-col items-center justify-center text-center opacity-20">
+                <i class="fa-solid fa-code text-7xl mb-4"></i>
+                <h3 class="text-lg font-bold">READY_FOR_INSPECTION</h3>
+            </div>
+        </div>
+    </main>
+
+    <aside class="w-72 bg-[#0d1117] border-l border-[#30363d] flex flex-col hidden lg:flex">
+        <div class="p-3 border-b border-[#30363d] bg-[#161b22] text-[10px] font-black text-gray-500 uppercase tracking-widest">Repository Insight</div>
+        <div id="repo-meta" class="p-4 space-y-4 overflow-y-auto">
+            <div class="animate-pulse space-y-2"><div class="h-4 bg-gray-800 rounded w-3/4"></div><div class="h-4 bg-gray-800 rounded w-1/2"></div></div>
+        </div>
+        <div class="p-3 border-t border-b border-[#30363d] bg-[#161b22] text-[10px] font-black text-gray-500 uppercase tracking-widest">Latest Commits</div>
+        <div id="commit-history" class="flex-grow overflow-y-auto p-2 space-y-2"></div>
+    </aside>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+<script>
+    const GITHUB_TOKEN = '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'; 
+    const USER = 'defPythonCoder';
+    const API_BASE = 'https://api.github.com';
+    let currentRepo = '';
+
+    const headers = { 
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json'
+    };
+
+    const icons = {
+        'py': 'fa-brands fa-python text-yellow-500',
+        'js': 'fa-brands fa-js text-yellow-400',
+        'html': 'fa-brands fa-html5 text-orange-600',
+        'css': 'fa-brands fa-css3 text-blue-500',
+        'md': 'fa-solid fa-file-lines text-blue-300',
+        'png': 'fa-solid fa-image text-purple-400',
+        'jpg': 'fa-solid fa-image text-purple-400',
+        'default': 'fa-solid fa-file-code text-gray-500'
+    };
+
+    async function loadRepos() {
+        try {
+            const res = await fetch(`${API_BASE}/user/repos?sort=updated&per_page=100`, { headers });
+            const data = await res.json();
+            
+            const EXCLUDED_REPOS = [
+                'strike-theme',
+                'web',
+                'register-open-domain',
+                'register'
+            ];
+            const repos = (Array.isArray(data) ? data : []).filter(repo => !EXCLUDED_REPOS.includes(repo.name));
+
+            document.getElementById('repo-grid').innerHTML = repos.map(repo => `
+                <div onclick="openStudio('${repo.name}')" class="repo-card bg-[#0d1117] border border-[#30363d] rounded-xl p-5 transition-all cursor-pointer group">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-blue-400 font-bold truncate">${repo.name}</h3>
+                        ${repo.private ? '<span class="text-[9px] text-yellow-500 border border-yellow-500/30 px-1.5 py-0.5 rounded">PRIVATE</span>' : ''}
+                    </div>
+                    <div class="flex items-center gap-3 text-[10px] font-bold text-gray-400">
+                        <span><i class="fa-solid fa-circle text-blue-500 text-[6px]"></i> ${repo.language || 'Plain'}</span>
+                    </div>
+                </div>
+            `).join('');
+        } catch (e) { console.error("Fetch Error", e); }
+    }
+
+    function resetViewer() {
+        document.getElementById('welcome-msg').classList.remove('hidden');
+
+        document.getElementById('code-pre').classList.add('hidden');
+        document.getElementById('image-viewer').classList.add('hidden');
+
+        document.getElementById('code-output').textContent = '';
+
+        document.getElementById('img-output').src = '';
+
+        document.getElementById('current-file-name').textContent = 'Select a resource...';
+
+        document.getElementById('lang-tag').textContent = '--';
+
+        document.querySelectorAll('#file-tree .active-file').forEach(el => el.classList.remove('active-file'));
+    }
+
+    async function openStudio(repoName) {
+        currentRepo = repoName;
+        document.getElementById('repo-viewer').classList.add('hidden');
+        document.getElementById('code-studio').classList.remove('hidden');
+        document.getElementById('back-btn').classList.remove('hidden');
+        document.getElementById('header-path').textContent = repoName.toUpperCase();
+        
+        resetViewer();
+        document.getElementById('file-tree').innerHTML = '';
+
+        loadTree('');
+        loadRepoMetadata(repoName);
+        loadCommits(repoName);
+    }
+
+    async function loadTree(path = '', parentElement = null) {
+        const res = await fetch(
+            `${API_BASE}/repos/${USER}/${currentRepo}/contents/${path}`,
+            { headers }
+        );
+
+        const items = await res.json();
+
+        const tree = parentElement || document.getElementById('file-tree');
+
+        if (!parentElement) {
+            tree.innerHTML = '';
+        }
+
+        items.forEach(item => {
+            const ext = item.name.split('.').pop().toLowerCase();
+
+            const iconClass =
+                item.type === 'dir'
+                    ? 'fa-solid fa-folder text-blue-400'
+                    : (icons[ext] || icons['default']);
+
+            const li = document.createElement('li');
+            li.className = "text-[11px]";
+
+            const row = document.createElement('div');
+            row.className =
+                "flex items-center gap-2 p-2 hover:bg-white/5 rounded cursor-pointer truncate";
+
+            const arrow = item.type === 'dir'
+                ? `<i class="fa-solid fa-chevron-right text-[9px] text-gray-500 transition-transform folder-arrow"></i>`
+                : `<span class="w-2"></span>`;
+
+            row.innerHTML = `
+                ${arrow}
+                <i class="${iconClass} w-4 text-center"></i>
+                <span>${item.name}</span>
+            `;
+
+            li.appendChild(row);
+
+            let subTree = null;
+
+            row.onclick = async (e) => {
+                e.stopPropagation();
+
+                document.querySelectorAll('#file-tree .active-file')
+                    .forEach(el => el.classList.remove('active-file'));
+
+                row.classList.add('active-file');
+
+                if (item.type === 'dir') {
+                    const arrowIcon = row.querySelector('.folder-arrow');
+
+                    // collapse
+                    if (subTree) {
+                        subTree.remove();
+                        subTree = null;
+                        arrowIcon.style.transform = 'rotate(0deg)';
+                        return;
+                    }
+
+                    arrowIcon.style.transform = 'rotate(90deg)';
+
+                    subTree = document.createElement('ul');
+                    subTree.className = 'ml-4 border-l border-[#30363d] pl-2';
+
+                    li.appendChild(subTree);
+
+                    await loadTree(item.path, subTree);
+                } else {
+                    loadFile(item);
+                }
+            };
+
+            tree.appendChild(li);
+        });
+    }
+    async function loadFile(item) {
+        const welcome = document.getElementById('welcome-msg');
+        const codePre = document.getElementById('code-pre');
+        const imgView = document.getElementById('image-viewer');
+        const output = document.getElementById('code-output');
+        
+        welcome.classList.add('hidden');
+        document.getElementById('current-file-name').textContent = item.path;
+
+        const isImg = ['png','jpg','svg','gif'].includes(item.name.split('.').pop().toLowerCase());
+
+        if(isImg) {
+            codePre.classList.add('hidden');
+            imgView.classList.remove('hidden');
+            document.getElementById('img-output').src = item.download_url;
+        } else {
+            imgView.classList.add('hidden');
+            codePre.classList.remove('hidden');
+            
+            const res = await fetch(`${API_BASE}/repos/${USER}/${currentRepo}/contents/${item.path}`, {
+                headers: { ...headers, 'Accept': 'application/vnd.github.v3.raw' }
+            });
+            const text = await res.text();
+            
+            const ext = item.name.split('.').pop().toLowerCase();
+
+            const langMap = {
+                py: 'python',
+                js: 'javascript',
+                html: 'xml',
+                css: 'css',
+                json: 'json',
+                md: 'markdown',
+                cpp: 'cpp',
+                c: 'c',
+                java: 'java',
+                ts: 'typescript',
+                php: 'php',
+                rb: 'ruby',
+                go: 'go',
+                rs: 'rust',
+                sh: 'bash'
+            };
+
+            const lang = langMap[ext] || ext;
+
+            output.className = '';
+            output.removeAttribute('data-highlighted');
+
+            output.textContent = text;
+
+            output.className = `hljs language-${lang}`;
+
+            document.getElementById('lang-tag').textContent = lang;
+
+            hljs.highlightElement(output);
+            hljs.lineNumbersBlock(output);
+        }
+    }
+
+    async function loadRepoMetadata(name) {
+        const res = await fetch(`${API_BASE}/repos/${USER}/${name}`, { headers });
+        const repo = await res.json();
+        document.getElementById('repo-meta').innerHTML = `
+            <div class="text-xs space-y-2">
+                <p class="text-gray-500">CREATED: <span class="text-white">${new Date(repo.created_at).toLocaleDateString()}</span></p>
+                <p class="text-gray-500">MAIN_LANG: <span class="text-white">${repo.language || 'N/A'}</span></p>
+                <p class="text-gray-500">VISIBILITY: <span class="text-white uppercase">${repo.visibility}</span></p>
+            </div>
+        `;
+    }
+
+    async function loadCommits(name) {
+        const res = await fetch(`${API_BASE}/repos/${USER}/${name}/commits?per_page=10`, { headers });
+        const commits = await res.json();
+        document.getElementById('commit-history').innerHTML = commits.map(c => `
+            <div class="p-2 border border-[#30363d] rounded bg-[#0d1117] text-[10px]">
+                <div class="text-blue-400 font-bold truncate">${c.commit.message}</div>
+                <div class="text-gray-600 mt-1">${new Date(c.commit.author.date).toLocaleString()}</div>
+            </div>
+        `).join('');
+    }
+
+    function showRepos() {
+        document.getElementById('repo-viewer').classList.remove('hidden');
+        document.getElementById('code-studio').classList.add('hidden');
+        document.getElementById('back-btn').classList.add('hidden');
+        document.getElementById('header-path').textContent = "DASHBOARD";
+    }
+
+    loadRepos();
+</script>
+</body>
+</html>
